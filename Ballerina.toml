@@ -1,0 +1,5 @@
+[project]
+org-name= "rodrigo.schneider"
+version= "0.1.0"
+
+[dependencies]
