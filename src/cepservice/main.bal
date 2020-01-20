@@ -1,13 +1,22 @@
 import ballerina/http;
 import wso2/soap;
+import ballerina/docker;
 
+@docker:Expose{}
+listener http:Listener cepserviceEP = new(9090);
 
 soap:Soap11Client soapEndpoint = new(SOAP_ENDPOINT);
+
+@docker:Config{
+    dockerHost: "tcp://localhost:2375",
+    name:"cepservice",
+    tag:"v1.0"
+}
 
 @http:ServiceConfig {
     basePath: "/"
 }
-service cepService on new http:Listener(9090) {
+service cepService on cepserviceEP {
     @http:ResourceConfig {
         methods: ["GET"],
         path: "cep/{cep}"
