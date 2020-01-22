@@ -6,12 +6,7 @@ string cep = "00000000";
 
 xml mockXml = xml `<ns:consultaCEP>
                                 <cep>${cep}</cep>
-                            </ns:consultaCEP>`;
-
-json mockJson = { "consultaCEP": {
-                    "cep": "00000000"
-                    }
-                };
+                            </ns:consultaCEP>`;                                          
 
 @test:Config {}
 function shouldMountXmlWithGivenParam() {
@@ -22,11 +17,14 @@ function shouldMountXmlWithGivenParam() {
 
 @test:Config {}
 function shouldReturnJsonFromGivenXml() {
+    var expected = JSON_RESPONSE;
+    var actual = convertXmlToJson(XML_RESPONSE);
+    test:assertEquals(actual, expected, msg = "Json conversion failed.");
 }
 
 @test:Config {}
 function httpResponseShouldHaveJsonAsPayload() {
-    var httpResponse = createRestResponse(mockJson);
+    var httpResponse = createRestResponse(JSON_RESPONSE);
     var actual = httpResponse.getJsonPayload();
-    test:assertEquals(actual, mockJson, msg = "Payload mismatch.");
+    test:assertEquals(actual, JSON_RESPONSE, msg = "Payload mismatch.");
 }

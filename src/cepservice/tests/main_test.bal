@@ -2,7 +2,7 @@ import ballerina/test;
 import ballerina/http;
 
 http:Client clientEP = new("http://localhost:9090");
-
+              
 @test:Config {}
 function statusCode200ExpectedWhenGivenValidCep() {
     var expected = "200";
@@ -29,7 +29,7 @@ function responseContentTypeJsonExpectedWhenGivenValidCep() {
 
 @test:Config {}
 function AddressDetailsExpectedWhenGivenValidCep() {
-    json expected = JSON_SCHEMA;
+    json expected = JSON_RESPONSE;
     var response = clientEP->get("/cep/94460100");
     if (response is http:Response) {
         var actualPayload = response.getJsonPayload();
@@ -44,8 +44,8 @@ function AddressDetailsExpectedWhenGivenValidCep() {
 }
 
 @test:Config {}
-function emptyArrayExpectedWhenGivenInvalidCep() {
-    json expected = [];
+function invalidCepResponseExpectedWhenGivenInvalidCep() {
+    json expected = INVALID_CEP_MSG;
     var response = clientEP->get("/cep/00000000");
     if (response is http:Response) {
         var actualPayload = response.getJsonPayload();

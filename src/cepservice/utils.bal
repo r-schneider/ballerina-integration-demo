@@ -10,8 +10,7 @@ function mountXmlRequest(string cep) returns xml {
 }
 
 function convertXmlToJson(xml xmlResponse) returns json {
-    json jsonResponse = <@untainted> checkpanic jsonutils:fromXML(xmlResponse.Body.consultaCEPResponse, 
-                                                                    {preserveNamespaces: false});
+    json jsonResponse = <@untainted> checkpanic jsonutils:fromXML(xmlResponse.Body, {preserveNamespaces: false});
     return jsonResponse;
 }
 
