@@ -2,15 +2,14 @@ import ballerina/http;
 import ballerina/jsonutils;
 
 function mountXmlRequest(string cep) returns xml {
-    xmlns "http://cliente.bean.master.sigep.bsb.correios.com.br/" as ns;
-    xml requestBody = xml `<ns:consultaCEP>
+    xml requestBody = xml   `<ns:consultaCEP xmlns:ns="http://cliente.bean.master.sigep.bsb.correios.com.br/">
                                 <cep>${cep}</cep>
                             </ns:consultaCEP>`;
     return requestBody;
 }
 
 function convertXmlToJson(xml xmlResponse) returns json {
-    json jsonResponse = <@untainted> checkpanic jsonutils:fromXML(xmlResponse.Body, {preserveNamespaces: false});
+    json jsonResponse = <@untainted> checkpanic jsonutils:fromXML(xmlResponse, {preserveNamespaces: false});
     return jsonResponse;
 }
 

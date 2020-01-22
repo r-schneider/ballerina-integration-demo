@@ -1,1 +1,1 @@
-final string SOAP_ENDPOINT = "https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente";
+final string SOAP_ENDPOINT = "https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente";                           
